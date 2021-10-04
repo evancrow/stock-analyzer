@@ -1,22 +1,13 @@
-from enum import Enum
+import downloadData
 from Model.model import Pattern
-from pricePoint import PricePoint
-import yfinance as yf
 
 class MockData:
     def __init__(self, type, data):
         self.type = type
         self.data = data
 
-    bearishDoubleTop = "Bearish Double Top"
-    bearishHeadAndShoulders = "Bearish Head And Shoulders"
-    bearishRisingWedge = "Bearish Rising Wedge"
-    bullishDoubleBottom = "Bullish Double Bottom"
-    bullishInvertedHeadAndShoulders = "Bullish Inverted Head And Shoulders"
-    bullishFallingWedge = "Bullish Falling Wedge"
-
 def BEARISH_DOUBLE_TOP_MOCK_DATA():
-    return MockData(Pattern.bearishDoubleTop, [PricePoint(), 1, 2])
+    return MockData(Pattern.bearishDoubleTop, downloadData.getFormattedDataFor('nflx', start="2018-02-20", end="2018-05-01"))
 
 def BEARISH_HEAD_AND_SHOULDERS():
     return MockData(Pattern.bearishHeadAndShoulders, [0, 1, 2])
@@ -32,4 +23,3 @@ def BULLISH_INVERTED_HEAD_AND_SHOULDERS():
 
 def BULLISH_FALLING_WEDGE():
     return MockData(Pattern.bullishFallingWedge, [0, 1, 2])
-
