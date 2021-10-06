@@ -6,7 +6,6 @@ from pricePoint import PricePoint
 def getFormattedDataFor(ticker, start=None, end=None):
     return formatDataAsPricePoint(downloadDataFor(ticker, start, end))
 
-
 def downloadDataFor(ticker, start = None, end = None):
     if start is None or end is None:
         return yf.download(ticker)
@@ -38,13 +37,9 @@ def downloadDataForCommodity(currency, start = None, end = None):
 
 def formatDataAsPricePointForCommodity(currency, data):
     formattedData = []
-    prices = data[currency]['prices']
+    prices = data[list(data.keys())[0]]['prices']
 
     for price in prices:
         formattedData.append(PricePoint(price['close'], price['formatted_date']))
 
     return formattedData
-
-# TESTING
-spy = getFormattedDataForCommodity("EUR", start="2019-01-01", end="2020-01-01")
-print(spy)
