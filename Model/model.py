@@ -1,9 +1,31 @@
-from enum import Enum
+from sklearn.linear_model import LinearRegression
+from Model import mockData
+from Model.pattern import Pattern
+import numpy as np
 
-class Pattern(Enum):
-    bearishDoubleTop = "Bearish Double Top"
-    bearishHeadAndShoulders = "Bearish Head And Shoulders"
-    bearishRisingWedge = "Bearish Rising Wedge"
-    bullishDoubleBottom = "Bullish Double Bottom"
-    bullishInvertedHeadAndShoulders = "Bullish Inverted Head And Shoulders"
-    bullishFallingWedge = "Bullish Falling Wedge"
+
+def getAllPrices(data):
+    prices = []
+
+    for point in data:
+        prices.append(point.price or 0)
+
+    prices = np.array(prices, dtype=float)
+    return prices
+
+
+def modelForPattern(pattern):
+    trainInput = []
+    trainOutput = []
+
+    patternData = mockData.mockDataForPattern(pattern)
+    trainInput.append(getAllPrices(patternData.data))
+    trainOutput.append(patternData.type.value)
+
+    trainInput = np.array(trainInput, dtype=object)
+    trainInput.reshape(-1, 1)
+
+    predictor = LinearRegression()
+    predictor.fit(trainInput, trainOutput)
+
+    return predictor
