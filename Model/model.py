@@ -3,6 +3,7 @@ from Model import mockData
 from Model.pattern import Pattern
 import numpy as np
 
+
 def getAllPrices(data):
     prices = []
 
@@ -11,6 +12,7 @@ def getAllPrices(data):
 
     prices = np.array(prices, dtype=float)
     return prices
+
 
 def modelForPattern(pattern):
     trainInput = []
@@ -27,5 +29,3 @@ def modelForPattern(pattern):
     predictor.fit(trainInput, trainOutput)
 
     return predictor
-
-modelForPattern(Pattern.bearishDoubleTop)
