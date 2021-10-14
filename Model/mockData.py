@@ -25,7 +25,7 @@ def BULLISH_DOUBLE_BOTTOM():
 
 def BULLISH_INVERTED_HEAD_AND_SHOULDERS():
     return MockData(Pattern.bullishInvertedHeadAndShoulders,
-                    downloadData.getFormattedDataForCommodity('PB', start="1995-12-22", end="1996-02-16"))
+                    downloadData.getFormattedDataForCommodity('SM', start="1996-10-30", end="1997-01-10"))
 
 
 def BULLISH_FALLING_WEDGE():

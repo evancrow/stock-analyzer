@@ -1,9 +1,9 @@
 from enum import Enum
 
 class Pattern(Enum):
-    bearishDoubleTop = "Bearish Double Top"
-    bearishHeadAndShoulders = "Bearish Head And Shoulders"
-    bearishRisingWedge = "Bearish Rising Wedge"
-    bullishDoubleBottom = "Bullish Double Bottom"
-    bullishInvertedHeadAndShoulders = "Bullish Inverted Head And Shoulders"
-    bullishFallingWedge = "Bullish Falling Wedge"
+    bearishDoubleTop = 0
+    bearishHeadAndShoulders = 1
+    bearishRisingWedge = 2
+    bullishDoubleBottom = 3
+    bullishInvertedHeadAndShoulders = 4
+    bullishFallingWedge = 5
