@@ -1,4 +1,4 @@
-from sklearn.linear_model import LinearRegression
+from neuralNet import NeuralNetwork
 from Model import mockData
 from Model.pattern import Pattern
 import numpy as np
@@ -22,10 +22,15 @@ def modelForPattern(pattern):
     trainInput.append(getAllPrices(patternData.data))
     trainOutput.append(patternData.type.value)
 
-    trainInput = np.array(trainInput, dtype=object)
+    trainInput = np.array(trainInput)
     trainInput.reshape(-1, 1)
 
-    predictor = LinearRegression()
-    predictor.fit(trainInput, trainOutput)
+    trainOutput = np.array([trainOutput]).T
 
-    return predictor
+    # number of weights must match number of inputs
+    numberOfWeights = len(trainInput[0])
+
+    neuralNet = NeuralNetwork(trainInput, trainOutput, numberOfWeights)
+    neuralNet.train()
+
+    return neuralNet

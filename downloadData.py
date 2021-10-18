@@ -12,7 +12,7 @@ def downloadDataFor(ticker, start=None, end=None):
     if start is None or end is None:
         return yf.download(ticker)
     else:
-        return yf.download(ticker, start=start, end=end)
+        return yf.download(ticker, start=start, end=end, interval="1d")
 
 
 # Returns data from yFinance as an array of PricePoint objects
