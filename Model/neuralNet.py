@@ -44,6 +44,7 @@ class NeuralNetwork():
             self.error_history.append(np.average(np.abs(self.error)))
             self.epoch_list.append(epoch)
 
+        print(self.error_history)
 
     # function to predict output on new and unseen input data
     def predict(self, new_input):
