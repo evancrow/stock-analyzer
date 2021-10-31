@@ -48,5 +48,3 @@ def formatDataAsPricePointForCommodity(currency, data):
         formattedData.append(PricePoint(price['close'], price['formatted_date']))
 
     return formattedData
-
-print(downloadDataFor('spy'))

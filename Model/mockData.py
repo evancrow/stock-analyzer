@@ -44,7 +44,6 @@ def formatData(stocks):
 
     # find the stock with the least amount of data
     for stock in stocks:
-        print(stock.name, len(stock.data))
         if len(stock.data) < maximumDataLength:
             maximumDataLength = len(stock.data)
 

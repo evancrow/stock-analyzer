@@ -33,8 +33,8 @@ class NeuralNetwork():
         delta = self.error * self.sigmoid(self.hidden, deriv=True)
         self.weights += np.dot(self.inputs.T, delta)
 
-    # train the neural net for 30,000 iterations
-    def train(self, epochs=30000):
+    # Epochs is the number of times the model is run
+    def train(self, epochs=10000):
         for epoch in range(epochs):
             # flow forward and produce an output
             self.feed_forward()
