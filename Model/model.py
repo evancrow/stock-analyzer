@@ -30,7 +30,7 @@ def convertToNerualNetData(data):
     return stockPrices
 
 
-def modelForPattern(pattern):
+def neuralNetForPattern(pattern):
     trainOutput = []
 
     patternData = mockData.mockDataForPattern(pattern)
