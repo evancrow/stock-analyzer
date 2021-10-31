@@ -3,7 +3,6 @@ from yahoofinancials import YahooFinancials
 from pricePoint import PricePoint
 
 
-# MOCK DATA
 def getFormattedDataFor(ticker, start=None, end=None):
     return formatDataAsPricePoint(downloadDataFor(ticker, start, end))
 
