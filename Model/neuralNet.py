@@ -33,7 +33,7 @@ class NeuralNetwork():
         delta = self.error * self.sigmoid(self.hidden, deriv=True)
         self.weights += np.dot(self.inputs.T, delta)
 
-    # train the neural net for 25,000 iterations
+    # train the neural net for 30,000 iterations
     def train(self, epochs=30000):
         for epoch in range(epochs):
             # flow forward and produce an output
@@ -43,8 +43,6 @@ class NeuralNetwork():
             # keep track of the error history over each epoch
             self.error_history.append(np.average(np.abs(self.error)))
             self.epoch_list.append(epoch)
-
-        print(self.error_history)
 
     # function to predict output on new and unseen input data
     def predict(self, new_input):
