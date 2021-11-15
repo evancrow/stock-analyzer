@@ -1,9 +1,10 @@
 import numpy as np
-import matplotlib.pyplot as plt
+from arrayHelper import equalArrayLengths
 
 
 class NeuralNetwork():
-    def __init__(self, inputs, outputs, numberOfWeights):
+    def __init__(self, pattern, inputs, outputs, numberOfWeights):
+        self.pattern = pattern
         self.inputs = inputs
         self.outputs = outputs
 
@@ -46,5 +47,9 @@ class NeuralNetwork():
 
     # function to predict output on new and unseen input data
     def predict(self, new_input):
-        prediction = self.sigmoid(np.dot(new_input, self.weights))
+        adjustedArrays = equalArrayLengths([new_input, self.weights])
+        adjusted_new_input = adjustedArrays[0]
+        adjusted_weights = adjustedArrays[1]
+
+        prediction = self.sigmoid(np.dot(adjusted_new_input, adjusted_weights))
         return prediction

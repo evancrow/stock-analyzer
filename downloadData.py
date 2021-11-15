@@ -21,7 +21,9 @@ def formatDataAsPricePoint(data):
 
     for index, close in enumerate(data['Close']):
         date = (data['Date'][index]).strftime("%x")
-        formattedData.append(PricePoint(close, date))
+
+        if close is not None and date is not None:
+            formattedData.append(PricePoint(close, date))
 
     return formattedData
 
@@ -45,6 +47,10 @@ def formatDataAsPricePointForCommodity(currency, data):
     prices = data[list(data.keys())[0]]['prices']
 
     for price in prices:
-        formattedData.append(PricePoint(price['close'], price['formatted_date']))
+        close = price['close']
+        date = price['formatted_date']
+
+        if close is not None and date is not None:
+            formattedData.append(PricePoint(close, date))
 
     return formattedData
