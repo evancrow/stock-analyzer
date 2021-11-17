@@ -1,6 +1,7 @@
+import downloadData
 from Model import mockData
 from Model.pattern import Pattern
-from predection import Predection
+from prediction import Prediction
 import neuralNet
 
 
@@ -12,7 +13,7 @@ def identifyPatternsFor(data):
         predectionValue = net.predict(neuralNet.pricePointToMatriceData(data))
         error = abs(net.pattern.value - predectionValue)
 
-        if error < 0.0004:
+        if error < 0.005:
             matchingPatterns.append(net.pattern)
 
     return matchingPatterns
@@ -31,11 +32,11 @@ def priceMovementPredictionFor(data):
             bullish.append(pattern)
 
     if len(bullish) > len(bearish):
-        return Predection.bullish
+        return Prediction.bullish
     elif len(bullish) < len(bearish):
-        return Predection.bearish
+        return Prediction.bearish
     else:
-        return Predection.none
+        return Prediction.none
 
 
-print(priceMovementPredictionFor(mockData.mockDataForPattern(Pattern.bearishDoubleTop)[0].data))
+print(priceMovementPredictionFor(downloadData.getFormattedDataFor('spy', start='2021-11-9', end='2021-11-17')))
