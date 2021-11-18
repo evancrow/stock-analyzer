@@ -18,7 +18,7 @@ def BEARISH_DOUBLE_TOP_MOCK_DATA():
 def BEARISH_HEAD_AND_SHOULDERS():
     return [
         MockData(type=Pattern.bearishHeadAndShoulders,
-                    data=downloadData.getFormattedDataForCommodity('USDJPY=x', start="1997-04-30", end="1997-07-30"))
+                 data=downloadData.getFormattedDataForCommodity('USDJPY=x', start="1997-04-30", end="1997-07-30"))
     ]
 
 
@@ -32,21 +32,21 @@ def BEARISH_RISING_WEDGE():
 def BULLISH_DOUBLE_BOTTOM():
     return [
         MockData(type=Pattern.bullishDoubleBottom,
-                    data=downloadData.getFormattedDataFor('VOD', start="2018-10-15", end="2018-11-13"))
+                 data=downloadData.getFormattedDataFor('VOD', start="2018-10-15", end="2018-11-13"))
     ]
 
 
 def BULLISH_INVERTED_HEAD_AND_SHOULDERS():
     return [
         MockData(type=Pattern.bullishInvertedHeadAndShoulders,
-                    data=downloadData.getFormattedDataForCommodity('SM', start="1996-10-30", end="1997-01-10"))
+                 data=downloadData.getFormattedDataForCommodity('SM', start="1996-10-30", end="1997-01-10"))
     ]
 
 
-def BULLISH_FALLING_WEDGE():
+def BULLISH_PENNANT():
     return [
-        MockData(type=Pattern.bullishFallingWedge,
-                    data=downloadData.getFormattedDataForCommodity('DX', start="1997-10-22", end="1997-11-20"))
+        MockData(type=Pattern.bullishPennant,
+                 data=downloadData.getFormattedDataFor('IO', start="2019-01-07", end="2019-02-12"))
     ]
 
 
@@ -75,5 +75,5 @@ def mockDataForPattern(pattern):
         return formatData(BULLISH_DOUBLE_BOTTOM())
     elif pattern == Pattern.bullishInvertedHeadAndShoulders:
         return formatData(BULLISH_INVERTED_HEAD_AND_SHOULDERS())
-    elif pattern == Pattern.bullishFallingWedge:
-        return formatData(BULLISH_FALLING_WEDGE())
+    elif pattern == Pattern.bullishPennant:
+        return formatData(BULLISH_PENNANT())

@@ -12,8 +12,9 @@ def identifyPatternsFor(data):
     for net in neuralNets:
         predectionValue = net.predict(neuralNet.pricePointToMatriceData(data))
         error = abs(net.pattern.value - predectionValue)
+        print(net.pattern, error)
 
-        if error < 0.005:
+        if error < 0.05:
             matchingPatterns.append(net.pattern)
 
     return matchingPatterns
@@ -39,4 +40,4 @@ def priceMovementPredictionFor(data):
         return Prediction.none
 
 
-print(priceMovementPredictionFor(downloadData.getFormattedDataFor('spy', start='2021-11-9', end='2021-11-17')))
+print(priceMovementPredictionFor(downloadData.getFormattedDataFor('SPY', start='2021-11-1', end='2021-11-18')))
