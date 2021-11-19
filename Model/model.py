@@ -20,7 +20,7 @@ def identifyPatternsFor(data):
     return matchingPatterns
 
 
-# Example call: priceMovementPredictionFor(mockData.mockDataForPattern(Pattern.bearishDoubleTop)[0].data)
+# Example call: priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))
 def priceMovementPredictionFor(data):
     matchingPatterns = identifyPatternsFor(data)
     bullish = []
@@ -40,4 +40,4 @@ def priceMovementPredictionFor(data):
         return Prediction.none
 
 
-print(priceMovementPredictionFor(downloadData.getFormattedDataFor('SPY', start='2021-11-1', end='2021-11-18')))
+print(priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))
