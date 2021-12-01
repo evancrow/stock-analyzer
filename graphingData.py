@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
-import downloadData
 import pylab
-import pandas as pd
 from enum import Enum
+import plotly.graph_objects as go
 
 
 class Column(Enum):
@@ -10,6 +8,7 @@ class Column(Enum):
     close = 'Close'
     high = 'High'
     low = 'Low'
+    candlestick = 'Candlestick'
 
 
 def graphAllData(data):
@@ -18,5 +17,16 @@ def graphAllData(data):
 
 
 def graphData(data, type: Column):
-    data.plot(y=type.value)
-    pylab.show()
+    if type.value == 'candlestick' :
+        fig = go.Figure(data=[go.Candlestick(
+            open=data['Open'],
+            high=data['High'],
+            low=data['Low'],
+            close=data['Close'])])
+
+        fig.show()
+    else:
+        data.plot(y=type.value)
+        pylab.show()
+
+
