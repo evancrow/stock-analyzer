@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Predection(Enum):
+class Prediction(Enum):
     bullish = "Price Will Increase"
     bearish = "Price Will Decrease"
-    none = "No Predection"
+    none = "No Prediction"

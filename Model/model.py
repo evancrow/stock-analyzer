@@ -1,88 +1,26 @@
-import math
-from neuralNet import NeuralNetwork
+import downloadData
 from Model import mockData
 from Model.pattern import Pattern
-import numpy as np
-from predection import Predection
-
-
-def pricePointToMatriceData(data):
-    prices = []
-    max = 0
-
-    for point in data:
-        price = point.price
-        if price > max:
-            max = math.ceil(price)
-        prices.append(price or 0)
-
-    # Divide all number by ten to the number of ten places in the highest number
-    divisible = math.pow(10, len(str(max)[::-1]))
-
-    for i in range(len(prices)):
-        prices[i] = prices[i] / divisible
-
-    return prices
-
-
-def convertToNeuralNetData(data):
-    stockPrices = []
-
-    for stock in data:
-        prices = pricePointToMatriceData(stock.data)
-        stockPrices.append(prices)
-
-    stockPrices = np.array(stockPrices, dtype=float)
-    return stockPrices
-
-
-def neuralNetForPattern(pattern):
-    trainOutput = []
-
-    patternData = mockData.mockDataForPattern(pattern)
-    trainInput = convertToNeuralNetData(patternData)
-
-    for i in range(len(patternData)):
-        trainOutput.append(pattern.value)
-
-    trainInput = np.array(trainInput)
-    trainInput.reshape(-1, 1)
-
-    trainOutput = np.array([trainOutput]).T
-
-    # number of weights must match number of inputs
-    numberOfWeights = len(trainInput[0])
-
-    neuralNet = NeuralNetwork(pattern, trainInput, trainOutput, numberOfWeights)
-    neuralNet.train()
-
-    return neuralNet
-
-
-def createNeuralNets():
-    neuralNets = []
-
-    for pattern in Pattern:
-        neuralNets.append(neuralNetForPattern(pattern))
-
-    return neuralNets
+from prediction import Prediction
+import neuralNet
 
 
 def identifyPatternsFor(data):
-    neuralNets = createNeuralNets()
+    neuralNets = neuralNet.retrieveNeuralNets()
     matchingPatterns = []
 
     for net in neuralNets:
-        predectionValue = net.predict(pricePointToMatriceData(data))
+        predectionValue = net.predict(neuralNet.pricePointToMatriceData(data))
         error = abs(net.pattern.value - predectionValue)
+        print(net.pattern, error)
 
-        if error < 0.0004:
+        if error < 0.05:
             matchingPatterns.append(net.pattern)
 
     return matchingPatterns
 
 
-# Example call: priceMovementPredictionFor(mockData.mockDataForPattern(Pattern.bearishDoubleTop)[0].data)
+# Example call: priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))
 def priceMovementPredictionFor(data):
     matchingPatterns = identifyPatternsFor(data)
     bullish = []
@@ -95,11 +33,11 @@ def priceMovementPredictionFor(data):
             bullish.append(pattern)
 
     if len(bullish) > len(bearish):
-        return Predection.bullish
+        return Prediction.bullish
     elif len(bullish) < len(bearish):
-        return Predection.bearish
+        return Prediction.bearish
     else:
-        return Predection.none
+        return Prediction.none
 
 
-print(priceMovementPredictionFor(mockData.mockDataForPattern(Pattern.bearishDoubleTop)[0].data))
+print(priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))

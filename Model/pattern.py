@@ -7,4 +7,4 @@ class Pattern(Enum):
     bearishRisingWedge = 0.2
     bullishDoubleBottom = 0.3
     bullishInvertedHeadAndShoulders = 0.4
-    bullishFallingWedge = 0.5
+    bullishPennant = 0.5
