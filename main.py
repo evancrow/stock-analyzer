@@ -1,16 +1,23 @@
-# This is a sample Python script.
+import PySimpleGUI as sg
+import yfinance as yf
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+sg.theme('DarkAmber')  # Add a touch of color
 
+# All the stuff inside your window.
+layout = [[sg.Text('Enter A Stock Ticker'), sg.InputText()],
+          [sg.Button('Ok'), sg.Button('Cancel')]]
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Create the Window
+window = sg.Window('Stock Predictor', layout)
 
+# Event Loop to process "events" and get the "values" of the inputs
+while True:
+    event, values = window.read()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    if event == sg.WIN_CLOSED or event == 'Cancel' or event == 'Ok':  # if user closes window or clicks any button
+        break
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+ticker = str(values[0])
+stockData = yf.download(ticker, start="2017-01-01", end="2017-04-30")
+
+window.close()
