@@ -1,23 +1,23 @@
-import PySimpleGUI as sg
-import yfinance as yf
+import downloadData
+from Model import model
+from Windows import getTickerView
+from Windows import loadingView
+from Windows import predictionView
 
-sg.theme('DarkAmber')  # Add a touch of color
 
-# All the stuff inside your window.
-layout = [[sg.Text('Enter A Stock Ticker'), sg.InputText()],
-          [sg.Button('Ok'), sg.Button('Cancel')]]
+def startApp():
+    ticker, isCommodity = getTickerView.open()
+    dates = downloadData.getDateAndThirtyDaysAgo()
 
-# Create the Window
-window = sg.Window('Stock Predictor', layout)
+    if isCommodity == False:
+        stockData = downloadData.getFormattedDataFor(ticker, start=dates[1], end=dates[0])
+    else:
+        stockData = downloadData.getFormattedDataForCommodity(ticker, start=dates[1], end=dates[0])
 
-# Event Loop to process "events" and get the "values" of the inputs
-while True:
-    event, values = window.read()
+    prediction = model.priceMovementPredictionFor(stockData)
 
-    if event == sg.WIN_CLOSED or event == 'Cancel' or event == 'Ok':  # if user closes window or clicks any button
-        break
+    if predictionView.open(prediction):
+        startApp()
 
-ticker = str(values[0])
-stockData = yf.download(ticker, start="2017-01-01", end="2017-04-30")
 
-window.close()
+startApp()

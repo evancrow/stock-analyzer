@@ -1,6 +1,17 @@
 import yfinance as yf
 from yahoofinancials import YahooFinancials
 from pricePoint import PricePoint
+import datetime as date
+
+
+def getDateAndThirtyDaysAgo():
+    today = date.datetime.today()
+    thirtyDaysAgo = today - date.timedelta(days=30)
+
+    start = today.strftime("%Y-%m-%d")
+    end = thirtyDaysAgo.strftime("%Y-%m-%d")
+
+    return [start, end]
 
 
 def getFormattedDataFor(ticker, start=None, end=None):

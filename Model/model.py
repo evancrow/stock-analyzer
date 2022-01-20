@@ -1,8 +1,5 @@
-import downloadData
-from Model import mockData
-from Model.pattern import Pattern
-from prediction import Prediction
-import neuralNet
+from Model.predections import Prediction
+from Model import neuralNet
 
 
 def identifyPatternsFor(data):
@@ -20,7 +17,8 @@ def identifyPatternsFor(data):
     return matchingPatterns
 
 
-# Example call: priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))
+# Example call: priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1',
+# end='2021-11-18')))
 def priceMovementPredictionFor(data):
     matchingPatterns = identifyPatternsFor(data)
     bullish = []
@@ -38,6 +36,3 @@ def priceMovementPredictionFor(data):
         return Prediction.bearish
     else:
         return Prediction.none
-
-
-print(priceMovementPredictionFor(downloadData.getFormattedDataFor('AAPL', start='2021-11-1', end='2021-11-18')))
