@@ -5,11 +5,11 @@ sg.theme('LightGrey1')
 
 
 def open(prediction):
-    text = "No predicition available ☹️"
+    text = "No prediction available ☹️"
     if prediction == predections.Prediction.bullish:
-        text = "The stock will go up!"
+        text = "The stock will go up 📈!"
     elif prediction == predections.Prediction.bearish:
-        text = "The stock will go down!"
+        text = "The stock will go down! 📉"
 
     layout = [[sg.Text(text, font=('Any 18'))],
               [sg.Button('Restart')]]
