@@ -1,7 +1,6 @@
 import downloadData
 from Model import model
 from Windows import getTickerView
-from Windows import loadingView
 from Windows import predictionView
 
 
