@@ -8,7 +8,7 @@ def startApp():
     ticker, isCommodity = getTickerView.open()
     dates = downloadData.getDateAndThirtyDaysAgo()
 
-    if isCommodity == False:
+    if not isCommodity:
         stockData = downloadData.getFormattedDataFor(ticker, start=dates[1], end=dates[0])
     else:
         stockData = downloadData.getFormattedDataForCommodity(ticker, start=dates[1], end=dates[0])
