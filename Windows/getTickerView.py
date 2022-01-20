@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 sg.theme('LightGrey1')
 
+
 def createWindow():
     # All the stuff inside your window.
     layout = [[sg.Text('Enter a ticker:', key='actionText'), sg.InputText()],
