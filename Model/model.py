@@ -7,8 +7,8 @@ def identifyPatternsFor(data):
     matchingPatterns = []
 
     for net in neuralNets:
-        predectionValue = net.predict(neuralNet.pricePointToMatriceData(data))
-        error = abs(net.pattern.value - predectionValue)
+        predictionValue = net.predict(neuralNet.pricePointToMatriceData(data))
+        error = abs(net.pattern.value - predictionValue)
         print(net.pattern, error)
 
         if error < 0.05:
